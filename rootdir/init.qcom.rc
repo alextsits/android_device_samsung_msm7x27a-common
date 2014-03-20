@@ -210,10 +210,9 @@ service iprenew_p2p /system/bin/dhcpcd -n p2p
     disabled
     oneshot
 
-service hostapd /system/bin/hostapd -dddd /data/misc/wifi/hostapd.conf
-    class main
-    user root
-    group root
+service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
+    socket hostapd_athap0 dgram 660 wifi wifi
+    group wifi inet
     oneshot
     disabled
 
