@@ -8,7 +8,7 @@ unset WIFIMAC
 unset BTMAC
 
 # Skip processing if MAC addresses are already written
-if [ -f /data/.mac.info -a -f /data/misc/bluedroid/bdaddr ]; then
+if [ -f /data/.nvmac.info -a -f /data/misc/bluedroid/bdaddr ]; then
 	echo "MAC addresses already found."
 fi
 
@@ -24,12 +24,12 @@ until [ $(expr length "$BTMAC") == 12 ]; do
 done
 
 # Set WiFi MAC address
-echo $WIFIMAC >/data/.mac.info
+echo $WIFIMAC >/data/.nvmac.info
 
 # Convert BT MAC address to proper format
 echo $BTMAC | sed 's!^M$!!;s!\-!!g;s!\.!!g;s!\(..\)!\1:!g;s!:$!!' > /data/misc/bluedroid/bdaddr
 
 chmod 666 /data/misc/bluedroid/bdaddr
-chmod 666 /data/.mac.info
+chmod 666 /data/.nvmac.info
 
 exit
