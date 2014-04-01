@@ -109,6 +109,11 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 ## Samsung has weird framebuffer
 TARGET_NO_INITLOGO := true
 
+## Charging mode
+BOARD_LPM_BOOT_ARGUMENT_NAME := androidboot.boot_pause
+BOARD_LPM_BOOT_ARGUMENT_VALUE := batt
+BOARD_CHARGER_RES := device/samsung/msm7x27a-common/res/charger
+
 ## Bootanimation
 TARGET_BOOTANIMATION_USE_RGB565 := true
 

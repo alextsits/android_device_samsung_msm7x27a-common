@@ -54,6 +54,11 @@ PRODUCT_PACKAGES += \
     libqcomfm_jni \
     FM2
 
+## Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
+
 ## Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -77,6 +82,7 @@ PRODUCT_COPY_FILES += \
     device/samsung/msm7x27a-common/rootdir/init.qcom.rc:root/init.qcom.rc \
     device/samsung/msm7x27a-common/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc \
     device/samsung/msm7x27a-common/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
+	device/samsung/msm7x27a-common/rootdir/lpm.rc:root/lpm.rc \
     device/samsung/msm7x27a-common/rootdir/fstab.qcom:root/fstab.qcom
 
 ## Recovery
