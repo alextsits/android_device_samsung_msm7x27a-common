@@ -25,3 +25,5 @@ echo "Cherry-picking in vendor/aokp..."
 git cherry-pick 3dd4ee37b1bb2100bd3e832f8ca0bf3eada7d026 #add mGerrit prebuilt
 git checkout ff6583fc1ce24e7117dad2fbfe09bb784d9536d4 --theirs -- prebuilt/common/app/mGerrit.apk  #bump mGerrit to v2.07
 cd $rootdirectory
+#cp device/samsung/jena/aokp.mk vendor/aokp/products/jena.mk
+#cp device/samsung/jenad/aokp.mk vendor/aokp/products/jenad.mk
