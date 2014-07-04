@@ -1,3 +1,15 @@
+From 3cf01dc1d82152bf64890b2b35f07ce1a02f316e Mon Sep 17 00:00:00 2001
+From: bleached <alexhs.tsi@gmail.com>
+Date: Fri, 4 Jul 2014 14:55:04 +0300
+Subject: [PATCH 1/2] qcom-fm: add support for mr1 based fm solution.
+
+Change-Id: I70db62630f2383ffda0446a5548cd87fc10a8b2e
+---
+ core/java/android/os/Process.java                  |    6 ++++++
+ data/etc/platform.xml                              |    2 ++
+ .../android/server/pm/PackageManagerService.java   |    9 +++++++++
+ 3 files changed, 17 insertions(+)
+
 diff --git a/core/java/android/os/Process.java b/core/java/android/os/Process.java
 index 1ba52fe..5497557 100644
 --- a/core/java/android/os/Process.java
@@ -58,3 +70,6 @@ index 87eb570..332b015 100755
  
          String separateProcesses = SystemProperties.get("debug.separate_processes");
          if (separateProcesses != null && separateProcesses.length() > 0) {
+-- 
+1.7.9.5
+

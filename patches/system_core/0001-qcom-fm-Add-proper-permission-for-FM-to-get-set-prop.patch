@@ -1,3 +1,15 @@
+From df45490a9eb48bad35397c8d14633ac45e643c58 Mon Sep 17 00:00:00 2001
+From: bleached <alexhs.tsi@gmail.com>
+Date: Fri, 4 Jul 2014 15:04:36 +0300
+Subject: [PATCH 1/1] qcom-fm: Add proper permission for FM to get/set
+ property variables.
+
+Change-Id: Iabc1e41c06e03179c534dfa32eea3f5952a8f59b
+---
+ include/private/android_filesystem_config.h |    7 +++++++
+ init/property_service.c                     |    6 ++++++
+ 2 files changed, 13 insertions(+)
+
 diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
 index ac43c16..7d92458 100644
 --- a/include/private/android_filesystem_config.h
@@ -47,3 +59,6 @@ index 66d55d0..1e1d34b 100755
  #ifdef CONTROL_PERMS_APPEND
  CONTROL_PERMS_APPEND
  #endif
+-- 
+1.7.9.5
+
