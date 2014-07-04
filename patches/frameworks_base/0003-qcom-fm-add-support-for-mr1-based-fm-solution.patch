@@ -1,21 +1,5 @@
-From 04a1cc7feaa7fab710edd64156967c9836b022b0 Mon Sep 17 00:00:00 2001
-From: Konsta <konsta09@gmail.com>
-Date: Fri, 26 Apr 2013 16:55:27 +0300
-Subject: [PATCH 16/18] qcom-fm: add support for mr1 based fm solution
-
-Squashed commit between:
-https://www.codeaurora.org/gitweb/quic/la/?p=platform/frameworks/base.git;a=commit;h=27086d06dec240e8915580208197ab7169ec498e
-https://www.codeaurora.org/gitweb/quic/la/?p=platform/frameworks/base.git;a=commit;h=a776f068da4f45f79d42ce7f9ceb6b4f3f18b8ee
-
-Change-Id: Ia6a38a1ad300d9179eead13a117f56017a026826
----
- core/java/android/os/Process.java                  |    6 ++++++
- data/etc/platform.xml                              |    2 ++
- .../android/server/pm/PackageManagerService.java   |   10 +++++++++-
- 3 files changed, 17 insertions(+), 1 deletion(-)
-
 diff --git a/core/java/android/os/Process.java b/core/java/android/os/Process.java
-index 05099fb..aec22d0 100644
+index 1ba52fe..5497557 100644
 --- a/core/java/android/os/Process.java
 +++ b/core/java/android/os/Process.java
 @@ -109,6 +109,12 @@ public class Process {
@@ -44,10 +28,10 @@ index 12f62fe..b0ef834 100644
  
  </permissions>
 diff --git a/services/java/com/android/server/pm/PackageManagerService.java b/services/java/com/android/server/pm/PackageManagerService.java
-index f134854..e25f8b4 100644
+index 87eb570..332b015 100755
 --- a/services/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/java/com/android/server/pm/PackageManagerService.java
-@@ -190,10 +190,15 @@ public class PackageManagerService extends IPackageManager.Stub {
+@@ -192,10 +192,15 @@ public class PackageManagerService extends IPackageManager.Stub {
      private static final boolean DEBUG_APP_DIR_OBSERVER = false;
      private static final boolean DEBUG_VERIFY = false;
  
@@ -63,18 +47,14 @@ index f134854..e25f8b4 100644
  
      private static final boolean GET_CERTIFICATES = true;
  
-@@ -992,7 +997,10 @@ public class PackageManagerService extends IPackageManager.Stub {
-         mSettings.addSharedUserLPw("com.tmobile.thememanager", THEME_MAMANER_GUID, ApplicationInfo.FLAG_SYSTEM);
+@@ -1014,6 +1019,10 @@ public class PackageManagerService extends IPackageManager.Stub {
+         mSettings.addSharedUserLPw("com.tmobile.thememanager", THEME_MANAGER_GUID, ApplicationInfo.FLAG_SYSTEM);
          mSettings.addSharedUserLPw("android.uid.nfc", NFC_UID, ApplicationInfo.FLAG_SYSTEM);
          mSettings.addSharedUserLPw("android.uid.bluetooth", BLUETOOTH_UID, ApplicationInfo.FLAG_SYSTEM);
--
 +        mSettings.addSharedUserLPw("android.uid.fm_radio",
 +                 MULTIPLE_APPLICATION_UIDS
 +                         ? FM_RADIO_UID : FIRST_APPLICATION_UID,
 +                 ApplicationInfo.FLAG_SYSTEM);
+ 
          String separateProcesses = SystemProperties.get("debug.separate_processes");
          if (separateProcesses != null && separateProcesses.length() > 0) {
-             if ("*".equals(separateProcesses)) {
--- 
-1.7.9.5
-

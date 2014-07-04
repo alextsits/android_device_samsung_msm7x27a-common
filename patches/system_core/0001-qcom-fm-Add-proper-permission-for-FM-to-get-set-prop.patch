@@ -1,33 +1,19 @@
-From ebcc5e5253b611c97f5902115ab15635f8138947 Mon Sep 17 00:00:00 2001
-From: TheWhisp <daavis.90@gmail.com>
-Date: Mon, 12 Aug 2013 23:46:00 +0300
-Subject: [PATCH] qcom-fm: Add proper permission for FM to get/set property
- variables
-
-Allow FM Process to set and get the system property variables
-specific for FM operation.
-
-Change-Id: I6ce8e95266cd399bd8c301890523616271bf0b1e
----
- include/private/android_filesystem_config.h | 6 ++++++
- init/property_service.c                     | 6 ++++++
- 2 files changed, 12 insertions(+)
-
 diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
-index 16efe58..f7c7691 100644
+index ac43c16..7d92458 100644
 --- a/include/private/android_filesystem_config.h
 +++ b/include/private/android_filesystem_config.h
-@@ -63,6 +63,9 @@
+@@ -63,6 +63,10 @@
  #define AID_NFC           1027  /* nfc subsystem */
  #define AID_SDCARD_R      1028  /* external storage read access */
- #define AID_AUDIT         1031  /* audit daemon */
+ 
 +#ifdef QCOM_FM_ENABLED
 +#define AID_FM_RADIO      1029  /* FM radio */
 +#endif
- 
- #define AID_THEMEMAN      1300  /* theme manager */
- 
-@@ -176,6 +179,9 @@ static const struct android_id_info android_ids[] = {
++
+ #define AID_SHELL         2000  /* adb and debug shell user */
+ #define AID_CACHE         2001  /* cache access */
+ #define AID_DIAG          2002  /* access to diagnostic resources */
+@@ -173,6 +177,9 @@ static const struct android_id_info android_ids[] = {
      { "mot_dlna",  AID_MOT_DLNA, },
  #endif
      { "misc",      AID_MISC, },
@@ -35,13 +21,13 @@ index 16efe58..f7c7691 100644
 +    { "fm_radio",  AID_FM_RADIO, },
 +#endif
      { "nobody",    AID_NOBODY, },
-     { "theme_man", AID_THEMEMAN },
-     { "audit",      AID_AUDIT, },
+ };
+ 
 diff --git a/init/property_service.c b/init/property_service.c
-index d3558e7..6e8cb5d 100755
+index 66d55d0..1e1d34b 100755
 --- a/init/property_service.c
 +++ b/init/property_service.c
-@@ -100,6 +100,9 @@ struct {
+@@ -99,6 +99,9 @@ struct {
      { "persist.security.", AID_SYSTEM,   0 },
      { "persist.service.bdroid.", AID_BLUETOOTH,   0 },
      { "selinux."         , AID_SYSTEM,   0 },
@@ -51,7 +37,7 @@ index d3558e7..6e8cb5d 100755
      { "net.pdp",          AID_RADIO,    AID_RADIO },
      { "service.bootanim.exit", AID_GRAPHICS, 0 },
  #ifdef PROPERTY_PERMS_APPEND
-@@ -122,6 +125,9 @@ struct {
+@@ -121,6 +124,9 @@ struct {
  } control_perms[] = {
      { "dumpstate",AID_SHELL, AID_LOG },
      { "ril-daemon",AID_RADIO, AID_RADIO },
@@ -61,6 +47,3 @@ index d3558e7..6e8cb5d 100755
  #ifdef CONTROL_PERMS_APPEND
  CONTROL_PERMS_APPEND
  #endif
--- 
-1.8.1.2
-
