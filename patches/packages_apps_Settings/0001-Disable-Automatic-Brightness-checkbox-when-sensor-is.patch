@@ -1,0 +1,26 @@
+From b3e702b252a93fbf192dcef4d0991973fa348be8 Mon Sep 17 00:00:00 2001
+From: bleached <alexhs.tsi@gmail.com>
+Date: Wed, 9 Jul 2014 16:33:15 +0300
+Subject: [PATCH] Disable Automatic-Brightness checkbox when sensor is not
+ available.
+
+Change-Id: I304aa5380ec46f24ce618476cc5e8d727674717e
+---
+ src/com/android/settings/BrightnessPreference.java |    1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/com/android/settings/BrightnessPreference.java b/src/com/android/settings/BrightnessPreference.java
+index f6b371a..32a9155 100644
+--- a/src/com/android/settings/BrightnessPreference.java
++++ b/src/com/android/settings/BrightnessPreference.java
+@@ -184,6 +184,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
+                 }
+             }
+         } else {
++            mCheckBox.setEnabled(false);
+             mSeekBar.setEnabled(true);
+             mAutoSensitivityTitle.setVisibility(View.GONE);
+             mAutoSensitivity.setVisibility(View.GONE);
+-- 
+1.7.9.5
+
