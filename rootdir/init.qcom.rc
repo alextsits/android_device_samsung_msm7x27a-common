@@ -65,13 +65,9 @@ on boot
     chown system system /sys/class/misc/backlightnotification/enabled
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/button-backlight/brightness
-    chown system camera /sys/class/leds/flashlight/brightness
     chmod 0666 /sys/class/misc/backlightnotification/enabled
     chmod 0660 /sys/class/leds/lcd-backlight/brightness
     chmod 0660 /sys/class/leds/button-backlight/brightness
-    chmod 0660 /sys/class/leds/flashlight/brightness
-    chmod 0664 /sys/devices/virtual/sec/ts/brightness
-    chown system system /sys/devices/virtual/sec/ts/brightness
 
     ## Sensors
     chown system system /system/etc/sensors.dat
@@ -110,31 +106,6 @@ on boot
     ## For qmuxd socket
     mkdir /data/radio 0770 radio radio
     chown radio radio 0770 /data/radio
-
-    ## Power management
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 25000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
-
-    ## Boostpulse
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/boostpulse
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown system system /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/boostpulse
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/down_differential
-
-    ## Don't disable dmesg access for apps
-    write /proc/sys/kernel/dmesg_restrict 0
 
 on post-fs-data
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
