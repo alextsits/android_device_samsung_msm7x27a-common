@@ -55,7 +55,7 @@
 /dev/video*               0660   system     system
 
 # CDMA radio interface MUX
-/dev/tun                  0660   vpn        vpn
+/dev/tun                  0660   system     vpn
 
 # regular apps need to be able to open ion
 /dev/ion                  0664   system     system
