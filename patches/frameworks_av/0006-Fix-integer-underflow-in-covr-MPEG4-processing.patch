@@ -1,0 +1,35 @@
+From 69953bc3d4893db42522a944508fa6a402cb4650 Mon Sep 17 00:00:00 2001
+From: "Joshua J. Drake" <android-open-source@qoop.org>
+Date: Mon, 4 May 2015 17:14:11 -0500
+Subject: [PATCH 6/8] Fix integer underflow in covr MPEG4 processing
+
+When the 'chunk_data_size' variable is less than 'kSkipBytesOfDataBox', an
+integer underflow can occur. This causes an extraordinarily large value to
+be passed to MetaData::setData, leading to a buffer overflow.
+
+Bug: 20923261
+(cherry picked from commit 18b7e3cfda64697e803755df64081619f7d44cc5)
+
+Change-Id: Id2484cfe3fdce0c9ba57d2bded0cdf019d6fe935
+---
+ media/libstagefright/MPEG4Extractor.cpp |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/media/libstagefright/MPEG4Extractor.cpp b/media/libstagefright/MPEG4Extractor.cpp
+index 214ad75..59a1c0f 100644
+--- a/media/libstagefright/MPEG4Extractor.cpp
++++ b/media/libstagefright/MPEG4Extractor.cpp
+@@ -1500,6 +1500,10 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
+                     return ERROR_IO;
+                 }
+                 const int kSkipBytesOfDataBox = 16;
++                if (chunk_data_size <= kSkipBytesOfDataBox) {
++                    return ERROR_MALFORMED;
++                }
++
+                 mFileMetaData->setData(
+                     kKeyAlbumArt, MetaData::TYPE_NONE,
+                     buffer + kSkipBytesOfDataBox, chunk_data_size - kSkipBytesOfDataBox);
+-- 
+1.7.9.5
+
